@@ -16,6 +16,13 @@ const User = sequelize.define('users', {
     },
     verifiedEmail: {
         type: DataTypes.BOOLEAN,
+        allowNull: false,
+        def
+    },
+    activationLink: {
+        type: DataTypes.STRING,
         allowNull: false
-    }
-})
+    },
+});
+
+module.exports = User;
