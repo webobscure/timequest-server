@@ -14,6 +14,14 @@ class UserController {
             
         }
     }
+    
+    async activate(req, res, next) {
+        try {
+            
+        } catch (error) {
+            
+        }
+    }
 
     async logout(req,res,next) {
         try {
@@ -31,7 +39,7 @@ class UserController {
     }
     async getUsers(req,res,next) {
         try {
-            res.json(['123'])
+            res.json(['123', '456'])
         } catch (error) {
             
         }
