@@ -1,10 +1,15 @@
 const Sequelize = require("sequelize");
 require('dotenv').config();
 
-const sequelize = new Sequelize('users', '', '', {
-    host: '127.0.0.1',  // Локальный адрес
-    port: 5432,         // Стандартный порт PostgreSQL
-    dialect: 'postgres' // Указание диалекта
+const sequelize = new Sequelize('postgresql://postgres:tFmgnORNVuDnhlxHsvdPwFjFLYBGqqdR@junction.proxy.rlwy.net:40118/railway', {
+    dialect: 'postgres', // Указание диалекта
+    protocol: 'posgres',
+    dialectOptions: {
+        ssl: {
+            require: true,
+            rejectUnauthorized: false
+        }
+    }
 });
 
 module.exports = sequelize;
