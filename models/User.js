@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require("../config/database");
 
-const User = sequelize.define('users', {
+const User = sequelize.define('User', {
     nickname: {
         type: DataTypes.STRING,
         allowNull: false
@@ -16,13 +16,13 @@ const User = sequelize.define('users', {
     },
     verifiedEmail: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
-        def
+        defaultValue: false
     },
     activationLink: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
+        type: DataTypes.STRING
+    }
+}, {
+    tableName: 'users' // Название таблицы явно указывается как 'users'
 });
 
 module.exports = User;
