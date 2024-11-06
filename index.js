@@ -4,9 +4,19 @@ const nodemailer = require("nodemailer");
 const cors = require("cors");
 const cookieParser = require('cookie-parser');
 const router = require('./router/index');
+const sequelize = require("./config/database");
 
 const app = express()
 const PORT = process.env.PORT || 3000;
+
+sequelize
+.sync({ alter: true})
+.then(() => {
+    console.log("Database & tables created!");
+})
+.catch((err) => {
+    console.error("Error synchronizing database:", err)
+})
 
 app.use(express.json())
 app.use(cors());
