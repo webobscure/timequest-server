@@ -26,7 +26,7 @@ class UserService {
       });
   
       // Отправляем письмо с активацией
-      await mailService.sendActivationMail(email, activationLink);
+      await mailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`);
   
       // Создаем токены
       const userDto = new UserDto(user); // id, email, isActivated
@@ -39,6 +39,14 @@ class UserService {
         user: userDto,
       };
     }
+    async activate(activationLink) {
+      const user = await UserModel.findOne({activationLink})
+      if (!user) {
+        throw new Error("")
+      }
+      user.verifiedEmail = true;
+      await user.save();
+  }
   }
 
 module.exports = new UserService();
