@@ -25,10 +25,6 @@ app.use(cookieParser());
 app.use('/api', router);
 app.use(errorsMiddlewares);
 
-app.post('/signup', async (req, res) => {
-    const {email, nickname, password} = req.body
-})
-
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
