@@ -19,7 +19,20 @@ const User = sequelize.define('User', {
         defaultValue: false
     },
     activationLink: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    subscriptionDate: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    points: {
+        type: DataTypes.STRING,
+        defaultValue: 0
+    },
+    dayStreak: {
+        type: DataTypes.STRING,
+        defaultValue: 0
     }
 }, {
     tableName: 'users' // Название таблицы явно указывается как 'users'
