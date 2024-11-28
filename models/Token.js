@@ -8,7 +8,7 @@ const User = sequelize.define('tokens', {
         using: 'user::integer'
     },
     refreshToken: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false
     },
    
