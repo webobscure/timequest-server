@@ -1,4 +1,7 @@
-module.exports = (sequelize, DataTypes) => {
+const { DataTypes } = require("sequelize");
+const sequelize = require("../config/database"); 
+
+module.exports = () => {
   const Subsection = sequelize.define('Subsection', {
     sectionId: DataTypes.INTEGER,
     title: DataTypes.STRING,
