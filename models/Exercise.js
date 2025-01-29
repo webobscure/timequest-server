@@ -1,39 +1,33 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database"); // Подключение к БД
 
-const Exercise = sequelize.define('exercises', {
-  id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
-    primaryKey: true,
-  },
+const Exercise = sequelize.define('Exercise', {
   title: {
     type: DataTypes.STRING,
     allowNull: false,
   },
   coverImage: {
-    type: DataTypes.STRING, // Хранит URL или путь к файлу
+    type: DataTypes.STRING, 
     allowNull: true,
   },
   openImage: {
-    type: DataTypes.STRING, // Изображение при открытии
+    type: DataTypes.STRING, 
     allowNull: true,
   },
   content: {
-    type: DataTypes.TEXT, // Основной текст задания
+    type: DataTypes.TEXT,
     allowNull: false,
   },
   audioUrl: {
-    type: DataTypes.STRING, // Ссылка на аудиофайл
+    type: DataTypes.STRING, 
     allowNull: true,
   },
   
   category: {
-    type: DataTypes.STRING, // Например, listening, speaking
+    type: DataTypes.STRING, 
     allowNull: true,
   },
 }, {
-  timestamps: true, // createdAt и updatedAt
   tableName: 'users' 
 });
 
