@@ -3,7 +3,7 @@ require('dotenv').config();
 
 const sequelize = new Sequelize(process.env.DATABASE_PUBLIC_URL, {
     dialect: 'postgres', // Указание диалекта
-    protocol: 'posgres',
+    protocol: 'postgres',
     dialectOptions: {
         ssl: {
             require: true,
