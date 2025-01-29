@@ -9,14 +9,9 @@ const errorsMiddlewares = require('./middlewares/errors-middlewares');
 const app = express()
 const PORT = process.env.PORT || 3000;
 
-sequelize
-.sync({ alter: true})
-.then(() => {
-    console.log("Database & tables created!");
-})
-.catch((err) => {
-    console.error("Error synchronizing database:", err)
-})
+sequelize.sync({ alter: true }) // или { force: true } для удаления и создания заново
+  .then(() => console.log("База данных синхронизирована"))
+  .catch((err) => console.error("Ошибка синхронизации БД:", err));
 
 app.use(express.json())
 app.use(cors());

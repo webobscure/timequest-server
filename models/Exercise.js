@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database"); // Подключение к БД
 
-const Exercise = sequelize.define("exercise", {
+const Exercise = sequelize.define('exercise', {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
