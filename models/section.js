@@ -1,16 +1,15 @@
-const { DataTypes } = require("sequelize");
-const sequelize = require("../config/database"); 
-
-module.exports = () => {
+// models/Section.js
+module.exports = (sequelize, DataTypes) => {
   const Section = sequelize.define('Section', {
-    articleId: DataTypes.INTEGER,
-    title: DataTypes.STRING,
-    content: DataTypes.TEXT
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   });
 
-  Section.associate = function(models) {
-    Section.belongsTo(models.Article, { foreignKey: 'articleId' });
-    Section.hasMany(models.Subsection, { foreignKey: 'sectionId' });
+  // Ассоциация с Article (один раздел может иметь много статей)
+  Section.associate = models => {
+    Section.hasMany(models.Article, { foreignKey: 'sectionId' });
   };
 
   return Section;

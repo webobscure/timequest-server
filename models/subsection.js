@@ -1,15 +1,27 @@
-const { DataTypes } = require("sequelize");
-const sequelize = require("../config/database"); 
-
-module.exports = () => {
+// models/Subsection.js
+module.exports = (sequelize, DataTypes) => {
   const Subsection = sequelize.define('Subsection', {
-    sectionId: DataTypes.INTEGER,
-    title: DataTypes.STRING,
-    content: DataTypes.TEXT
+    sectionId: {
+      type: DataTypes.INTEGER,
+      allowNull: false, // sectionId должен быть обязательным
+    },
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false, // title должен быть обязательным
+    },
+    content: {
+      type: DataTypes.TEXT,
+      allowNull: true, // content может быть пустым
+    }
   });
 
-  Subsection.associate = function(models) {
-    Subsection.belongsTo(models.Section, { foreignKey: 'sectionId' });
+  // Ассоциации
+  Subsection.associate = models => {
+    // Связь с моделью Section (много подразделов могут быть у одного раздела)
+    Subsection.belongsTo(models.Section, {
+      foreignKey: 'sectionId', 
+      as: 'section', // Опционально можно задать alias
+    });
   };
 
   return Subsection;

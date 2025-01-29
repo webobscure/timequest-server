@@ -1,31 +1,25 @@
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
-const basename = path.basename(__filename);
-const db = {};
-
-// Здесь создаем экземпляр Sequelize с конфигурацией
-const sequelize = new Sequelize(process.env.DATABASE_PUBLIC_URL, {
-    dialect: 'postgres', // Указание диалекта
-    protocol: 'postgres',
-    dialectOptions: {
-        ssl: {
-            require: true,
-            rejectUnauthorized: false
-        }
-    }
+const sequelize = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost:5432/your-database-name', {
+  dialect: 'postgres',
 });
 
+const models = {};
+
+// Загружаем все модели
 fs.readdirSync(__dirname)
-  .filter(file => {
-    return file.indexOf('.') !== 0 && file !== basename && file.slice(-3) === '.js';
-  })
+  .filter(file => file !== 'index.js') // Исключаем текущий файл
   .forEach(file => {
     const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
-    db[model.name] = model;
+    models[model.name] = model; // Добавляем модель в объект models
   });
 
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
+// Инициализируем ассоциации
+Object.keys(models).forEach(modelName => {
+  if (models[modelName].associate) {
+    models[modelName].associate(models);
+  }
+});
 
-module.exports = db;
+module.exports = { sequelize, Sequelize, models };

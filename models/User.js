@@ -1,41 +1,49 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require("../config/database");
- 
-const User = sequelize.define('User', {
-    nickname: {
+module.exports = (sequelize, DataTypes) => {
+    const User = sequelize.define('User', {
+      nickname: {
         type: DataTypes.STRING,
-        allowNull: false
-    },
-    email: {
+        allowNull: false,
+      },
+      email: {
         type: DataTypes.STRING,
-        allowNull: false
-    },
-    password: {
+        allowNull: false,
+        unique: true,
+      },
+      password: {
         type: DataTypes.STRING,
-        allowNull: false
-    },
-    verifiedEmail: {
+        allowNull: false,
+      },
+      verifiedEmail: {
         type: DataTypes.BOOLEAN,
-        defaultValue: false
-    },
-    activationLink: {
+        defaultValue: false,
+      },
+      activationLink: {
         type: DataTypes.STRING,
-        allowNull: false
-    },
-    subscriptionDate: {
-        type: DataTypes.STRING,
-        allowNull: true
-    },
-    points: {
-        type: DataTypes.STRING,
-        defaultValue: 0
-    },
-    dayStreak: {
-        type: DataTypes.STRING,
-        defaultValue: 0
-    }
-}, {
-    tableName: 'users' // Название таблицы явно указывается как 'users'
-});
-
-module.exports = User;
+        allowNull: false,
+      },
+      subscriptionDate: {
+        type: DataTypes.DATE,
+        allowNull: true,
+      },
+      points: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+      },
+      dayStreak: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+      },
+    }, {
+      tableName: 'users',
+    });
+  
+    // Ассоциации
+    User.associate = (models) => {
+      User.hasMany(models.Token, { 
+        foreignKey: 'userId', 
+        as: 'tokens',
+      });
+    };
+  
+    return User;
+  };
