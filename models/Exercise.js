@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database"); // Подключение к БД
 
-const Exercise = sequelize.define('exercise', {
+const Exercise = sequelize.define('exercises', {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
@@ -11,10 +11,6 @@ const Exercise = sequelize.define('exercise', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  description: {
-    type: DataTypes.TEXT,
-    allowNull: true,
-  },
   coverImage: {
     type: DataTypes.STRING, // Хранит URL или путь к файлу
     allowNull: true,
@@ -23,7 +19,7 @@ const Exercise = sequelize.define('exercise', {
     type: DataTypes.STRING, // Изображение при открытии
     allowNull: true,
   },
-  text: {
+  content: {
     type: DataTypes.TEXT, // Основной текст задания
     allowNull: false,
   },
@@ -31,17 +27,14 @@ const Exercise = sequelize.define('exercise', {
     type: DataTypes.STRING, // Ссылка на аудиофайл
     allowNull: true,
   },
-  difficultyLevel: {
-    type: DataTypes.ENUM("easy", "medium", "hard"),
-    allowNull: false,
-    defaultValue: "medium",
-  },
+  
   category: {
     type: DataTypes.STRING, // Например, listening, speaking
     allowNull: true,
   },
 }, {
   timestamps: true, // createdAt и updatedAt
+  tableName: 'users' 
 });
 
 module.exports = Exercise;
