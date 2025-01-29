@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const router = require('./router/index');
 const sequelize = require("./config/database");
 const errorsMiddlewares = require('./middlewares/errors-middlewares');
+const articlesRouter = require('./router/articles');
 
 const app = express()
 const PORT = process.env.PORT || 3000;
@@ -18,7 +19,7 @@ app.use(cors());
 app.use(cookieParser());
 app.use('/api', router);
 app.use(errorsMiddlewares);
-
+app.use('/articles', articlesRouter);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)

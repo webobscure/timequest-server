@@ -1,10 +1,11 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "timequest-server-production.up.railway.app",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
+    "username": "obscurium",
+    "password": "webobscure",
+    "database": "timequest",
+    "host": "localhost",
+    "dialect": "postgres",
+    "port": 5432 
   },
   "test": {
     "username": "root",
