@@ -27,7 +27,7 @@ app.use('/articles', articlesRouter);
 
 // Маршрут для чтения и отображения Markdown файла
 app.get('/markdown', (req, res) => {
-  const filePath = path.join(__dirname, 'README.md'); // Укажите путь к вашему MD файлу
+  const filePath = path.join(__dirname, './markdown/egypt.md'); // Укажите путь к вашему MD файлу
 
   // Читаем файл
   fs.readFile(filePath, 'utf8', (err, data) => {
