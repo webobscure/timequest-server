@@ -1,4 +1,5 @@
-const UserModel = require("../models/User");
+const { models } = require('../models'); // Импортируем объект с моделями
+const UserModel = models.User;
 const bcrypt = require("bcrypt");
 const uuid = require("uuid");
 const mailService = require("../service/mail-service");
@@ -11,7 +12,8 @@ class UserService {
       if (candidate) {
         throw ApiError.BadRequest(`Пользователь с почтовым адресом ${email} уже существует!`);
       }
-  
+      console.log('UserModel:', UserModel);
+console.log('UserModel.findOne:', typeof UserModel.findOne);
       // Шифруем пароль
       const hashPassword = await bcrypt.hash(password, 3);
       const activationLink = uuid.v4();

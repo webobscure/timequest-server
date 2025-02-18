@@ -1,11 +1,17 @@
 const fs = require('fs');
 const path = require('path');
-const Sequelize = require('sequelize');
-const sequelize = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost:5432/your-database-name', {
+const { Sequelize, DataTypes } = require('sequelize');
+const sequelize = new Sequelize(process.env.DATABASE_URL , {
   dialect: 'postgres',
 });
 
-const models = {};
+const UserModel = require('./User')(sequelize, DataTypes); // Вызов функции для инициализации модели
+const tokenModel = require('./Token')(sequelize, DataTypes);
+
+const models = {
+  User: UserModel, // Экспортируем модель с инициализацией
+  Token: tokenModel
+};
 
 // Загружаем все модели
 fs.readdirSync(__dirname)

@@ -13,7 +13,10 @@ const articlesRouter = require('./router/articles');
 
 const app = express()
 const PORT = process.env.PORT || 3000;
-
+(async () => {
+  const tables = await sequelize.getQueryInterface().showAllTables();
+  console.log('Таблицы в БД:', tables);
+})();
 sequelize.sync({ alter: true }) // или { force: true } для удаления и создания заново
   .then(() => console.log("База данных синхронизирована"))
   .catch((err) => console.error("Ошибка синхронизации БД:", err));

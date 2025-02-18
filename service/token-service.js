@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
-const tokenModel = require('../models/Token')
+const { models } = require('../models'); // Импортируем объект с моделями
+const tokenModel = models.Token;
 class TokenService {
     generateTokens(payload) {
         const accessToken = jwt.sign(payload, process.env.JWT_ACCESS_SECRET, {expiresIn: '30m'})
@@ -31,13 +32,13 @@ class TokenService {
 
     async saveToken(userId, refreshToken) {
         console.log('userId:', userId, 'refreshToken:', refreshToken); 
-        const tokenData = await tokenModel.findOne({where :{user: userId}
+        const tokenData = await tokenModel.findOne({where :{userId: userId}
         })
         if(tokenData) {
             tokenData.refreshToken = refreshToken;
             return tokenData.save();
         }
-        const token = await tokenModel.create({user: userId, refreshToken});
+        const token = await tokenModel.create({userId: userId, refreshToken});
         return token;
     }
 
