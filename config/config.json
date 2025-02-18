@@ -1,11 +1,11 @@
 {
   "development": {
-    "username": "obscurium",
-    "password": "webobscure",
-    "database": "timequest",
-    "host": "localhost",
+    "username": "postgres",
+    "password": "kRwvztlLKfTdjJUYrgUbcrurIUnJkXTs",
+    "database": "railway",
+    "host": "ballast.proxy.rlwy.net",
     "dialect": "postgres",
-    "port": 5432 
+    "port": 50359
   },
   "test": {
     "username": "root",

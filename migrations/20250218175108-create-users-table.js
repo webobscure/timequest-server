@@ -23,7 +23,26 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      // Добавьте остальные поля, если необходимо
+      verifiedEmail: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+      },
+      activationLink: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      subscriptionDate: {
+        type: Sequelize.DATE,
+        allowNull: true,
+      },
+      points: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+      },
+      dayStreak: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+      },
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false,
