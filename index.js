@@ -30,49 +30,20 @@ app.use('/articles', articlesRouter);
 
 // Маршрут для чтения и отображения Markdown файла
 app.get('/markdown', (req, res) => {
-  const filePath = path.join(__dirname, './markdown/egypt.md'); // Укажите путь к вашему MD файлу
+  const filePath = path.join(__dirname, './markdown/egypt.md');
 
-  // Читаем файл
   fs.readFile(filePath, 'utf8', (err, data) => {
     if (err) {
       console.error('Ошибка при чтении файла:', err);
       return res.status(500).send('Ошибка при чтении файла.');
     }
 
-    // Преобразуем Markdown в HTML
-    const htmlContent = marked(data);
-
-    // Отправляем HTML контент
-    res.send(`
-      <!DOCTYPE html>
-      <html lang="en">
-      <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Markdown Viewer</title>
-        <style>
-          body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 20px;
-          }
-          pre {
-            background: #f4f4f4;
-            padding: 10px;
-            border-radius: 5px;
-          }
-          code {
-            color: #d63384;
-          }
-        </style>
-      </head>
-      <body>
-        ${htmlContent}
-      </body>
-      </html>
-    `);
+    // Отправляем Markdown-текст напрямую
+    res.setHeader('Content-Type', 'text/plain'); // Важно: указываем тип контента
+    res.send(data);
   });
 });
+
 
 
 app.listen(PORT, () => {
